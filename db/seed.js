@@ -1,4 +1,5 @@
 const client = require(".");
+const { createShirt } = require("./shirts");
 const { createUser } = require("./users");
 
 const dropTables = async () => {
@@ -63,8 +64,8 @@ const createInitialUsers = async () => {
       },
     ];
     const users = await Promise.all(usersToCreate.map(createUser));
-    console.log("...Users created...");
     console.log(users);
+    console.log("...Users created...");
   } catch (error) {
     console.error(error);
   }
@@ -99,6 +100,9 @@ const createInitialShirts = async () => {
         price: 22.99,
       },
     ];
+    const shirts = await Promise.all(shirtsToCreate.map(createShirt));
+    console.log(shirts);
+    console.log("...Shirts created...");
   } catch (error) {
     console.error(error);
   }
@@ -110,6 +114,7 @@ const seedDB = async () => {
     await dropTables();
     await createTables();
     await createInitialUsers();
+    await createInitialShirts();
     console.log("...DB Seeded");
   } catch (error) {
     console.error(error);
